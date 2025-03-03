@@ -9,7 +9,8 @@
 <body>
     <header class="header">
         <div class="logo">hasaP2Pay</div>
-        <nav class="nav-links">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav class="nav-links" id="mainNav">
             <a href="index.html" data-i18n="home">Baş Sahypa</a>
             <a href="exchange.html" data-i18n="exchange">Söwda</a>
             <a href="wallet.html" data-i18n="wallet">Gapjyk</a>
@@ -25,9 +26,21 @@
     </header>
 
     <main>
-        <section class="hero">
-            <h1 data-i18n="wallet_title">Gapjyk Sahypasy</h1>
-            <p data-i18n="wallet_text">Bu ýerde gapjygyňyzy dolduryp bilersiňiz</p>
+        <section class="wallet-section">
+            <div class="balance-card">
+                <h3 data-i18n="total_balance">Jemi balans</h3>
+                <div class="balance-amount">10 000 TMT</div>
+            </div>
+
+            <div class="transaction-history">
+                <h3 data-i18n="transaction_history">Geçirim taryhy</h3>
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div>+ 500 TMT</div>
+                        <div>2023-10-05</div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 

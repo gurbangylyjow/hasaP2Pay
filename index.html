@@ -9,7 +9,8 @@
 <body>
     <header class="header">
         <div class="logo">hasaP2Pay</div>
-        <nav class="nav-links">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav class="nav-links" id="mainNav">
             <a href="index.html" data-i18n="home">Baş Sahypa</a>
             <a href="exchange.html" data-i18n="exchange">Söwda</a>
             <a href="wallet.html" data-i18n="wallet">Gapjyk</a>
@@ -27,13 +28,38 @@
     <main>
         <section class="hero">
             <h1 data-i18n="hero_title">Howpsuz P2P Geçirimler</h1>
-            <p data-i18n="hero_text">Beýleki ulanyjylar bilen howpsuz söwda</p>
+            <p class="hero-text" data-i18n="hero_text">Beýleki ulanyjylar bilen howpsuz söwda</p>
             <div class="cta-buttons">
                 <a href="exchange.html" class="button button-primary" data-i18n="cta_start">Başlamak</a>
                 <a href="about.html" class="button button-secondary" data-i18n="cta_learn">Giňişleýin</a>
             </div>
         </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3 data-i18n="feature1_title">Derrew Geçirim</h3>
+                <p data-i18n="feature1_text">1 minutdan gowrak wagt</p>
+            </div>
+            <div class="feature-card">
+                <h3 data-i18n="feature2_title">Arzan Bahalar</h3>
+                <p data-i18n="feature2_text">0.5% töleg komissiýasy</p>
+            </div>
+        </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4 data-i18n="footer_about">hasaP2Pay</h4>
+                <p data-i18n="footer_description">Howpsuz P2P Söwda Platformasy</p>
+            </div>
+            <div>
+                <h4 data-i18n="footer_legal">Hukuk</h4>
+                <p data-i18n="footer_terms">Ulanyş şertleri</p>
+                <p data-i18n="footer_privacy">Gizlinlik syýasaty</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="app.js"></script>
 </body>

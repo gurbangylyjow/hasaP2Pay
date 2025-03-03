@@ -9,7 +9,8 @@
 <body>
     <header class="header">
         <div class="logo">hasaP2Pay</div>
-        <nav class="nav-links">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav class="nav-links" id="mainNav">
             <a href="index.html" data-i18n="home">Baş Sahypa</a>
             <a href="exchange.html" data-i18n="exchange">Söwda</a>
             <a href="wallet.html" data-i18n="wallet">Gapjyk</a>
@@ -25,9 +26,27 @@
     </header>
 
     <main>
-        <section class="hero">
-            <h1 data-i18n="exchange_title">Söwda Sahypasy</h1>
-            <p data-i18n="exchange_text">Bu ýerde söwda edip bilersiňiz</p>
+        <section class="exchange-section">
+            <div class="trade-form">
+                <h3 data-i18n="new_trade">Täze söwda</h3>
+                <select class="currency-select">
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <input type="number" placeholder="Mukdar" class="amount-input">
+                <button class="button button-primary" data-i18n="buy_now">Häzir satyn al</button>
+            </div>
+
+            <div class="order-book">
+                <h3 data-i18n="active_orders">Aktiw sargytlar</h3>
+                <div class="order-list">
+                    <div class="order-item">
+                        <div>BTC/USD</div>
+                        <div>$62,000</div>
+                        <div>0.5 BTC</div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
