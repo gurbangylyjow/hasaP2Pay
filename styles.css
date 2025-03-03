@@ -1,0 +1,117 @@
+﻿:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --background: #f8fafc;
+    --text: #1e293b;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.header {
+    background: var(--white);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.language-switcher button {
+    background: none;
+    border: 2px solid var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.language-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 1rem;
+    display: none;
+    width: 150px;
+}
+
+.language-menu a {
+    display: block;
+    padding: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.language-menu a:hover {
+    background: var(--background);
+}
+
+.language-switcher:hover .language-menu {
+    display: block;
+}
+
+.hero {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+}
+
+.button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.button-primary {
+    background: var(--white);
+    color: var(--primary);
+}
+
+.button-secondary {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+}
