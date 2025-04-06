@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hasaP2Pay - Agza bol</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">hasaP2Pay</div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav class="nav-links" id="mainNav">
+            <a href="index.html" data-i18n="home">Baş Sahypa</a>
+            <a href="exchange.html" data-i18n="exchange">Söwda</a>
+            <a href="wallet.html" data-i18n="wallet">Gapjyk</a>
+            <a href="signup.html" class="signup-btn" data-i18n="signup">Agza bol</a>
+            <div class="language-switcher">
+                <button data-i18n="current_lang">Türkmen</button>
+                <div class="language-menu">
+                    <a href="#" data-lang="tk">Türkmen</a>
+                    <a href="#" data-lang="ru">Русский</a>
+                    <a href="#" data-lang="en">English</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="signup-section">
+            <div class="signup-container">
+                <h2 data-i18n="signup_title">Agza bol</h2>
+                <form class="signup-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="fullname" data-i18n="fullname">Ady we familiýasy</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="email">E-poçta</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" data-i18n="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" data-i18n="password">Parol</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" data-i18n="confirm_password">Paroly tassyklamak</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" data-i18n="terms_agree">Men ulanyş şertlerini kabul edýärin</label>
+                    </div>
+                    <button type="submit" class="button button-primary" data-i18n="signup_submit">Agza bol</button>
+                </form>
+                <p class="login-link" data-i18n="already_have_account">Hasabyňyz barmy? <a href="login.html" data-i18n="login">Giriş</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4 data-i18n="footer_about">hasaP2Pay</h4>
+                <p data-i18n="footer_description">Howpsuz P2P Söwda Platformasy</p>
+            </div>
+            <div>
+                <h4 data-i18n="footer_legal">Hukuk</h4>
+                <p data-i18n="footer_terms">Ulanyş şertleri</p>
+                <p data-i18n="footer_privacy">Gizlinlik syýasaty</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Handle form submission
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Parollar gabat gelmeýär!');
+                return;
+            }
+
+            try {
+                // Create user with email and password
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // Add user details to Firestore
+                await db.collection('users').doc(user.uid).set({
+                    fullname: fullname,
+                    email: email,
+                    phone: phone,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Redirect to wallet page after successful registration
+                window.location.href = 'wallet.html';
+            } catch (error) {
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'Bu e-poçta adresi eýýäm ulanylypdyr.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Nädogry e-poçta adresi.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Parol gaty gowşak.';
+                        break;
+                    default:
+                        errorMessage = 'Ýalňyşlyk ýüze çykdy.';
+                }
+                alert(errorMessage);
+            }
+        });
+    </script>
+</body>
+</html>

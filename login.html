@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hasaP2Pay - Giriş</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">hasaP2Pay</div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav class="nav-links" id="mainNav">
+            <a href="index.html" data-i18n="home">Baş Sahypa</a>
+            <a href="exchange.html" data-i18n="exchange">Söwda</a>
+            <a href="wallet.html" data-i18n="wallet">Gapjyk</a>
+            <a href="signup.html" class="signup-btn" data-i18n="signup">Agza bol</a>
+            <div class="language-switcher">
+                <button data-i18n="current_lang">Türkmen</button>
+                <div class="language-menu">
+                    <a href="#" data-lang="tk">Türkmen</a>
+                    <a href="#" data-lang="ru">Русский</a>
+                    <a href="#" data-lang="en">English</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="signup-section">
+            <div class="signup-container">
+                <h2 data-i18n="login_title">Giriş</h2>
+                <form class="signup-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email" data-i18n="email">E-poçta</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" data-i18n="password">Parol</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="button button-primary" data-i18n="login_submit">Giriş</button>
+                </form>
+                <p class="login-link" data-i18n="no_account">Hasabyňyz ýokmy? <a href="signup.html" data-i18n="signup">Agza bol</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4 data-i18n="footer_about">hasaP2Pay</h4>
+                <p data-i18n="footer_description">Howpsuz P2P Söwda Platformasy</p>
+            </div>
+            <div>
+                <h4 data-i18n="footer_legal">Hukuk</h4>
+                <p data-i18n="footer_terms">Ulanyş şertleri</p>
+                <p data-i18n="footer_privacy">Gizlinlik syýasaty</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Sign in with email and password
+                await auth.signInWithEmailAndPassword(email, password);
+                
+                // Redirect to wallet page after successful login
+                window.location.href = 'wallet.html';
+            } catch (error) {
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Ulanyjy tapylmady.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Nädogry parol.';
+                        break;
+                    default:
+                        errorMessage = 'Giriş wagtynda ýalňyşlyk ýüze çykdy.';
+                }
+                alert(errorMessage);
+            }
+        });
+    </script>
+</body>
+</html> 
